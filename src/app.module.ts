@@ -1,15 +1,15 @@
 import { Module } from '@nestjs/common';
-import { CacheModule } from '@nestjs/common/cache';
+import { CacheInterceptor, CacheModule } from '@nestjs/common/cache';
+import { APP_INTERCEPTOR } from '@nestjs/core';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 @Module({
-  imports: [
-    CacheModule.register({
-      isGlobal: true,
-    }),
-  ],
+  imports: [CacheModule.register()],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    { provide: APP_INTERCEPTOR, useClass: CacheInterceptor },
+  ],
 })
 export class AppModule {}
