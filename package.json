@@ -24,6 +24,7 @@
     "@nestjs/common": "^9.0.0",
     "@nestjs/core": "^9.0.0",
     "@nestjs/platform-express": "^9.0.0",
+    "axios": "^1.2.1",
     "cache-manager": "^5.1.4",
     "cache-manager-redis-store": "2.0.0",
     "reflect-metadata": "^0.1.13",

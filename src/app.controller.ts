@@ -8,7 +8,7 @@ export class AppController {
 
   @Get()
   @CacheKey('cache-test-route')
-  @CacheTTL(60)
+  @CacheTTL(15)
   getHello() {
     return this.appService.getHello();
   }
