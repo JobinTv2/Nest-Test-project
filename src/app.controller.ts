@@ -17,4 +17,8 @@ export class AppController {
   getHi() {
     return this.appService.getHello();
   }
+  @Get('test/excludes')
+  get() {
+    return this.appService.getHello();
+  }
 }
