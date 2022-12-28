@@ -12,4 +12,9 @@ export class AppController {
   getHello() {
     return this.appService.getHello();
   }
+
+  @Get('test/middleware')
+  getHi() {
+    return this.appService.getHello();
+  }
 }
