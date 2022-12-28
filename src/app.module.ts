@@ -26,9 +26,6 @@ import { TestMiddleware } from './middleware/test.middleware';
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(TestMiddleware).forRoutes({
-      path: 'test/middleware',
-      method: RequestMethod.GET,
-    });
+    consumer.apply(TestMiddleware).forRoutes(AppController);
   }
 }
