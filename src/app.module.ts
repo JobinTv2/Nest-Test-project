@@ -11,6 +11,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import * as redisStrore from 'cache-manager-redis-store';
 import { TestMiddleware } from './middleware/test.middleware';
+import { ValidateAuthTokenMiddleware } from './middleware/validateAuthToken.middleware';
 @Module({
   imports: [
     CacheModule.register({
@@ -26,18 +27,24 @@ import { TestMiddleware } from './middleware/test.middleware';
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer
-      .apply(TestMiddleware)
-      .exclude({
-        path: 'test/excludes',
-        method: RequestMethod.GET,
-      })
-      .forRoutes({
-        path: '*',
-        method: RequestMethod.ALL,
-      });
+    consumer.apply(ValidateAuthTokenMiddleware).forRoutes(AppController);
   }
 }
+
+// export class AppModule implements NestModule {
+//   configure(consumer: MiddlewareConsumer) {
+//     consumer
+//       .apply(TestMiddleware)
+//       .exclude({
+//         path: 'test/excludes',
+//         method: RequestMethod.GET,
+//       })
+//       .forRoutes({
+//         path: '*',
+//         method: RequestMethod.ALL,
+//       });
+//   }
+// }
 
 // 1. includes
 // consumer.apply(TestMiddleware).forRoutes({
