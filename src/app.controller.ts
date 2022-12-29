@@ -1,7 +1,8 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, UseFilters, UseInterceptors } from '@nestjs/common';
 import { CacheKey, CacheTTL } from '@nestjs/common/cache';
-import { UseInterceptors } from '@nestjs/common/decorators';
+import { ForbiddenException } from '@nestjs/common/exceptions';
 import { AppService } from './app.service';
+import { HttpExceptionFilter } from './filters/execption.filter';
 import { LoggingInterceptor } from './interceptors/logging.interceptor';
 
 @Controller()
@@ -29,5 +30,11 @@ export class AppController {
   @UseInterceptors(new LoggingInterceptor())
   testInterceptor() {
     return this.appService.getHello();
+  }
+
+  @Get('test/exceptionfilter')
+  @UseFilters(new HttpExceptionFilter())
+  testExceptionFilter() {
+    throw new ForbiddenException('Forbidden custom message');
   }
 }
