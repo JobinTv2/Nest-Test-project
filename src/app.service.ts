@@ -13,7 +13,6 @@ export class AppService {
 
     await this.cacheManager.set('todo-cache', response.data);
     const todo = await this.cacheManager.get('todo-cache');
-    console.log(todo, 'cached todo');
     // await this.cacheManager.del('cached-test-item');
     const cachedItem = await this.cacheManager.get('cached-test-item');
     // console.log(cachedItem, 'cachedItem');
