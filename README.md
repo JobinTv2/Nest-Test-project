@@ -27,6 +27,12 @@
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 - Caching with Redis
 - Middleware 
+- Exception filter
+- Interceptor
+- Pipes
+- Custom decorators
+- Injection scope
+- Dynamic modules
 
 ## Installation
 
