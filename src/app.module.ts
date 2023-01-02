@@ -1,6 +1,5 @@
 import {
   Module,
-  CacheModule,
   // CacheInterceptor,
   NestModule,
   MiddlewareConsumer,
@@ -8,17 +7,10 @@ import {
 // import { APP_INTERCEPTOR } from '@nestjs/core';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import * as redisStrore from 'cache-manager-redis-store';
 import { ValidateAuthTokenMiddleware } from './middleware/validateAuthToken.middleware';
 import { RedisModule } from './redis/redis.module';
 @Module({
-  imports: [
-    CacheModule.register({
-      store: redisStrore,
-      socket: { host: 'localhost', port: 6379 },
-    }),
-    RedisModule,
-  ],
+  imports: [RedisModule.register({ host: 'localhost', port: 6379 }, 50)],
   controllers: [AppController],
   providers: [
     AppService,
