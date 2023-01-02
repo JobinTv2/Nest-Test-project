@@ -9,6 +9,7 @@ import {
 import { CacheKey, CacheTTL } from '@nestjs/common/cache';
 import { ForbiddenException } from '@nestjs/common/exceptions';
 import { AppService } from './app.service';
+import { Data } from './custom-decorators/data.decorator';
 import { HttpExceptionFilter } from './filters/execption.filter';
 import { LoggingInterceptor } from './interceptors/logging.interceptor';
 import { TransformPipe } from './pipes/tranform.pipe';
@@ -49,5 +50,10 @@ export class AppController {
   @Post('test/pipe')
   testPipe(@Body(new TransformPipe()) body: any) {
     return body;
+  }
+
+  @Post('test/custom/decorator')
+  testDecorator(@Data() data: any) {
+    return data;
   }
 }
