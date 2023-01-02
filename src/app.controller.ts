@@ -1,9 +1,17 @@
-import { Controller, Get, UseFilters, UseInterceptors } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  UseFilters,
+  UseInterceptors,
+  Body,
+  Post,
+} from '@nestjs/common';
 import { CacheKey, CacheTTL } from '@nestjs/common/cache';
 import { ForbiddenException } from '@nestjs/common/exceptions';
 import { AppService } from './app.service';
 import { HttpExceptionFilter } from './filters/execption.filter';
 import { LoggingInterceptor } from './interceptors/logging.interceptor';
+import { TransformPipe } from './pipes/tranform.pipe';
 
 @Controller()
 export class AppController {
@@ -36,5 +44,10 @@ export class AppController {
   @UseFilters(new HttpExceptionFilter())
   testExceptionFilter() {
     throw new ForbiddenException('Forbidden custom message');
+  }
+
+  @Post('test/pipe')
+  testPipe(@Body(new TransformPipe()) body: any) {
+    return body;
   }
 }
