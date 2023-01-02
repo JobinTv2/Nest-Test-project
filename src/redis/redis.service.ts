@@ -1,10 +1,12 @@
-import { Injectable, Inject, CACHE_MANAGER } from '@nestjs/common';
+import { Injectable, Inject, CACHE_MANAGER, Scope } from '@nestjs/common';
 import axios from 'axios';
 import { Cache } from 'cache-manager';
 
-@Injectable()
+@Injectable({ scope: Scope.DEFAULT })
 export class RedisService {
-  constructor(@Inject(CACHE_MANAGER) private readonly cacheManager: Cache) {}
+  constructor(@Inject(CACHE_MANAGER) private readonly cacheManager: Cache) {
+    // console.log('hii');
+  }
 
   async getTodos(id) {
     const data = await this.getOrSetCache(`todos:${id}`, async () => {
