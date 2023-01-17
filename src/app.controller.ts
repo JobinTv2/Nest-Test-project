@@ -56,4 +56,8 @@ export class AppController {
   testDecorator(@Data() data: any) {
     return data;
   }
+  @Post('test/event')
+  testEventEmitter() {
+    return this.appService.testEventEmitter();
+  }
 }

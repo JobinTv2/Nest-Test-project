@@ -4,16 +4,22 @@ import {
   NestModule,
   MiddlewareConsumer,
 } from '@nestjs/common';
+import { EventEmitterModule } from '@nestjs/event-emitter';
 // import { APP_INTERCEPTOR } from '@nestjs/core';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { AppTestDataCreatedEventListener } from './listeners/app-test-data-created.listener';
 import { ValidateAuthTokenMiddleware } from './middleware/validateAuthToken.middleware';
 import { RedisModule } from './redis/redis.module';
 @Module({
-  imports: [RedisModule.register({ host: 'localhost', port: 6379 }, 50)],
+  imports: [
+    RedisModule.register({ host: 'localhost', port: 6379 }, 50),
+    EventEmitterModule.forRoot(),
+  ],
   controllers: [AppController],
   providers: [
     AppService,
+    AppTestDataCreatedEventListener,
     // { provide: APP_INTERCEPTOR, useClass: CacheInterceptor },
   ],
 })
