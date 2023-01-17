@@ -33,7 +33,7 @@
 - Custom decorators
 - Injection scope
 - Dynamic modules
-
+- Event emitter
 ## Installation
 
 ```bash
